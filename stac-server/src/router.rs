@@ -161,10 +161,10 @@ where
     match stac_api::Items::try_from(get_items)
         .map_err(Error::from)
         .and_then(|mut items| {
-            // TODO use serde_urlencoded
-            let paging: B::Paging = serde_qs::from_str(&serde_qs::to_string(&std::mem::take(
-                &mut items.additional_fields,
-            ))?)?;
+            // Need to go through `serde_urlencoded` because things come in as strings.
+            let paging: B::Paging = serde_urlencoded::from_str(&serde_urlencoded::to_string(
+                std::mem::take(&mut items.additional_fields),
+            )?)?;
             Ok(Items { items, paging })
         }) {
         Ok(items) => {

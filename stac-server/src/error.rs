@@ -15,9 +15,13 @@ pub enum Error {
     #[error(transparent)]
     Io(#[from] std::io::Error),
 
-    /// [serde_qs::Error]
+    /// [serde_urlencoded::de::Error]
     #[error(transparent)]
-    SerdeQs(#[from] serde_qs::Error),
+    SerdeUrlencodedDe(#[from] serde_urlencoded::de::Error),
+
+    /// [serde_urlencoded::ser::Error]
+    #[error(transparent)]
+    SerdeUrlencodedSer(#[from] serde_urlencoded::ser::Error),
 
     /// [stac_api::Error]
     #[error(transparent)]

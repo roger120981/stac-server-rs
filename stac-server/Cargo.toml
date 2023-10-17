@@ -15,7 +15,7 @@ aide = { version = "0.13", features = ["axum"] }
 axum = "0.7"
 hyper = "1"
 serde = { version = "1", features = ["derive"] }
-serde_qs = "0.12"
+serde_urlencoded = "0.7"
 stac = { version = "0.5", features = ["schemars"] }
 stac-api = { version = "0.3", features = ["schemars"] }
 stac-api-backend = { version = "0.1", path = "../stac-api-backend" }
