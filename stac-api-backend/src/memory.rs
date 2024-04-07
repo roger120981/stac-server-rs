@@ -112,7 +112,7 @@ impl Backend for MemoryBackend {
             let items: Vec<_> = items
                 .iter()
                 .filter(|item| {
-                    bbox.map(|bbox| item.intersects_bbox(bbox).unwrap_or(false))
+                    bbox.map(|bbox| item.intersects(&bbox).unwrap_or(false))
                         .unwrap_or(true)
                         && datetime
                             .map(|(start, end)| {

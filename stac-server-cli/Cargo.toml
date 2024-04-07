@@ -11,12 +11,12 @@ keywords = ["geospatial", "stac", "metadata", "geo", "raster"]
 categories = ["science", "data-structures"]
 
 [dependencies]
-aide = "0.12"
-axum = "0.6"
+aide = "0.13"
+axum = "0.7"
 clap = { version = "4", features = ["derive"] }
 serde = "1"
 stac = { version = "0.5" }
-stac-async = { version = "0.4" }
+stac-async = { version = "0.5" }
 stac-api-backend = { version = "0.1", path = "../stac-api-backend", features = [
     "memory",
     "pgstac",

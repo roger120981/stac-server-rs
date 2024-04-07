@@ -1,4 +1,3 @@
-use axum::Server;
 use futures_util::stream::StreamExt;
 use geojson::{Geometry, Value};
 use stac::{Catalog, Collection, Item};
@@ -7,7 +6,7 @@ use stac_api_backend::{Backend, Error, MemoryBackend, PgstacBackend};
 use stac_async::ApiClient;
 use stac_server::Config;
 use stac_validate::Validate;
-use std::net::TcpListener;
+use tokio::net::TcpListener;
 
 #[tokio::test]
 async fn memory() {
@@ -58,10 +57,9 @@ where
         catalog: Catalog::new("a-catalog", "A test catalog"),
     };
 
-    let listener = TcpListener::bind(&config.addr).unwrap();
+    let listener = TcpListener::bind(&config.addr).await.unwrap();
     let api = stac_server::api(backend, config).unwrap();
-    let builder = Server::from_tcp(listener).unwrap();
-    let server = builder.serve(api.into_make_service());
+    let server = axum::serve(listener, api);
     tokio::spawn(async { server.await.unwrap() });
 
     let client = ApiClient::new("http://127.0.0.1:7822").unwrap();

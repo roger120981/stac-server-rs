@@ -34,6 +34,7 @@ mod config;
 mod error;
 mod router;
 
+use tokio::net::TcpListener;
 pub use {config::Config, error::Error, router::api};
 
 /// Crate-specific result type.
@@ -57,12 +58,9 @@ where
     B: stac_api_backend::Backend,
     stac_api_backend::Error: From<<B as stac_api_backend::Backend>::Error>,
 {
-    let addr = config.addr.parse::<std::net::SocketAddr>()?;
+    let listener = TcpListener::bind(&config.addr).await?;
     let api = api(backend, config)?;
-    axum::Server::bind(&addr)
-        .serve(api.into_make_service())
-        .await
-        .map_err(Error::from)
+    axum::serve(listener, api).await.map_err(Error::from)
 }
 
 // Needed for integration tests.
