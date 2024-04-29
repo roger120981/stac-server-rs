@@ -4,6 +4,8 @@
 [![STAC API Validator](https://img.shields.io/github/actions/workflow/status/gadomski/stac-server-rs/validate.yaml?branch=main&label=STAC+API+Validator&style=for-the-badge)](https://github.com/gadomski/stac-server-rs/actions/workflows/validate.yaml)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT)
 
+*NOTE: this repo is archived, its functionality has been moved to https://github.com/stac-utils/stac-rs*
+
 A [STAC API](https://github.com/radiantearth/stac-api-spec) written in Rust.
 
 | Crate | Description |
